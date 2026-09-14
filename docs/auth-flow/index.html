@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alur Register / Login — Satu Kenangan (Kopi Kenangan)</title>
+  <meta name="description" content="Penjelasan visual alur autentikasi Login via WhatsApp (reverse OTP) aplikasi Satu Kenangan / Kopi Kenangan." />
+  <style>
+    :root {
+      --bg: #0f0d0b;
+      --panel: #1a1613;
+      --panel-2: #221c17;
+      --line: #2e2620;
+      --text: #f5ede2;
+      --muted: #b8a894;
+      --accent: #d9a441;
+      --accent-2: #25d366;
+      --code-bg: #14100d;
+      --radius: 16px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: radial-gradient(1200px 600px at 80% -10%, #2a2018 0%, var(--bg) 55%);
+      color: var(--text);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    .wrap { max-width: 960px; margin: 0 auto; padding: 0 20px 80px; }
+
+    header.hero {
+      text-align: center;
+      padding: 72px 20px 40px;
+    }
+    .badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(37,211,102,0.12);
+      border: 1px solid rgba(37,211,102,0.35);
+      color: var(--accent-2);
+      padding: 6px 14px; border-radius: 999px;
+      font-size: 13px; font-weight: 600; letter-spacing: .3px;
+      margin-bottom: 22px;
+    }
+    h1 {
+      font-size: clamp(28px, 5vw, 44px);
+      line-height: 1.15; margin: 0 0 16px;
+      background: linear-gradient(120deg, #f5ede2, var(--accent));
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .sub { color: var(--muted); max-width: 640px; margin: 0 auto; font-size: 17px; }
+
+    .callout {
+      background: linear-gradient(135deg, var(--panel-2), var(--panel));
+      border: 1px solid var(--line);
+      border-left: 4px solid var(--accent);
+      border-radius: var(--radius);
+      padding: 20px 24px; margin: 36px 0;
+    }
+    .callout strong { color: var(--accent); }
+
+    section { margin: 56px 0; }
+    h2 {
+      font-size: 24px; margin: 0 0 8px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    h2 .num {
+      width: 32px; height: 32px; flex: none;
+      display: grid; place-items: center;
+      background: var(--accent); color: #1a1206;
+      border-radius: 9px; font-size: 15px; font-weight: 800;
+    }
+    .lead { color: var(--muted); margin: 0 0 20px; }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 8px;
+      overflow-x: auto;
+    }
+    .mermaid { text-align: center; min-height: 40px; }
+
+    table { width: 100%; border-collapse: collapse; font-size: 14.5px; overflow: hidden; border-radius: 12px; }
+    th, td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+    th { background: var(--panel-2); color: var(--accent); font-weight: 700; }
+    tr:last-child td { border-bottom: none; }
+    td code, p code, li code { background: var(--code-bg); border: 1px solid var(--line); padding: 2px 6px; border-radius: 6px; font-size: 13px; color: #ffd98a; }
+
+    pre {
+      background: var(--code-bg);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 18px; overflow-x: auto;
+      font-size: 13.5px; line-height: 1.55;
+      color: #e6dccb;
+    }
+    pre code { color: inherit; }
+
+    ol.steps { counter-reset: step; list-style: none; padding: 0; }
+    ol.steps li {
+      position: relative; padding: 14px 16px 14px 58px; margin: 10px 0;
+      background: var(--panel); border: 1px solid var(--line); border-radius: 12px;
+    }
+    ol.steps li::before {
+      counter-increment: step; content: counter(step);
+      position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+      width: 30px; height: 30px; display: grid; place-items: center;
+      background: var(--accent-2); color: #08110a; border-radius: 50%; font-weight: 800; font-size: 14px;
+    }
+
+    footer { text-align: center; color: var(--muted); font-size: 13.5px; padding-top: 30px; border-top: 1px solid var(--line); }
+    a { color: var(--accent); }
+    .files { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 10px; }
+    .files span { background: var(--panel); border: 1px solid var(--line); padding: 4px 10px; border-radius: 8px; font-size: 12.5px; color: var(--muted); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="hero">
+      <div class="badge">
+        <svg width="16" height="16" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="40" height="40" rx="20" fill="#25D366"/><path fill-rule="evenodd" clip-rule="evenodd" d="M20.06 6C12.37 6 6.12 12.22 6.12 19.87c0 2.45.64 4.83 1.86 6.94L6 34l7.39-1.93a13.9 13.9 0 0 0 6.66 1.7h.01c7.68 0 13.94-6.23 13.94-13.88 0-3.71-1.45-7.2-4.08-9.82A13.86 13.86 0 0 0 20.06 6Z" fill="#fff"/></svg>
+        Reverse OTP via WhatsApp
+      </div>
+      <h1>Alur Register &amp; Login<br/>Satu Kenangan</h1>
+      <p class="sub">Penjelasan visual alur autentikasi aplikasi <strong>Kopi Kenangan (Satu Kenangan)</strong>, hasil analisis file bundle front-end.</p>
+      <div class="files">
+        <span>api-iqBu4Ynb.js</span>
+        <span>view.Landing-DRUkapcY.js</span>
+        <span>satu_kenangan-BiKgLHwO.js</span>
+      </div>
+    </header>
+
+    <div class="callout">
+      <p style="margin:0 0 8px"><strong>Kesimpulan utama:</strong> Tidak ada endpoint <code>register</code> terpisah.</p>
+      <p style="margin:0">Register &amp; login <strong>digabung</strong> dalam satu alur <strong>"Login via WhatsApp" berbasis reverse OTP</strong>. Identitas diverifikasi dari <em>nomor pengirim WhatsApp</em>, bukan dari kode yang Anda ketik. Jika nomor belum terdaftar, mengirim pesan pertama otomatis membuatkan akun — itulah "register"-nya.</p>
+    </div>
+
+    <section>
+      <h2><span class="num">1</span> Diagram Alur (Flowchart)</h2>
+      <p class="lead">Alur lengkap dari membuka halaman hingga berhasil masuk, termasuk semua percabangan.</p>
+      <div class="card">
+        <pre class="mermaid">
+flowchart TD
+    A([Buka halaman /sk/ - Landing]) --> B["set bahasa = id<br/>baca token dari localStorage"]
+    B --> C{Token ada?}
+    C -- Ya --> D([jump ke Home - sudah login])
+    C -- Tidak --> E["whatsappReplyOtp()"]
+
+    E --> F["POST /whatsapp_reply_otp<br/>{device_id, device_type, otp_type: 1004}"]
+    F --> G{error_code == 0?}
+    G -- Tidak --> H["Tampilkan toast error"]
+    G -- Ya --> I{account_error ada?}
+    I -- Ya --> H
+    I -- Tidak --> J["Simpan serial_num<br/>Hapus token lama"]
+
+    J --> K([Tampil tombol 'Login via WhatsApp'])
+    K --> L["Klik tombol - onOpenWhatsApp()"]
+    L --> M{reply_to_phone ada?}
+    M -- Tidak --> E
+    M -- Ya --> N["Buka wa.me/reply_to_phone?text=whatsapp_content"]
+
+    N --> O["User KIRIM pesan dari WhatsApp-nya"]
+    O --> P["Server verifikasi dari nomor pengirim"]
+    P --> Q["Klik 'Refresh' - onRefresh()"]
+    Q --> R([replace ke Home - masuk / terdaftar])
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h2><span class="num">2</span> Diagram Urutan (Sequence)</h2>
+      <p class="lead">Interaksi antar aktor: User, Web App, Server, dan WhatsApp.</p>
+      <div class="card">
+        <pre class="mermaid">
+sequenceDiagram
+    actor U as User
+    participant W as Web App
+    participant S as Server
+    participant WA as WhatsApp
+
+    U->>W: Buka /sk/
+    W->>W: set language=id, cek token
+    alt Token sudah ada
+        W-->>U: Langsung ke Home
+    else Belum login
+        W->>S: POST /whatsapp_reply_otp {device_id, device_type, otp_type:1004}
+        S-->>W: {serial_num, reply_to_phone, whatsapp_content}
+        W->>W: simpan serial_num, hapus token lama
+        W-->>U: Tampilkan tombol Login via WhatsApp
+        U->>W: Klik tombol
+        W->>WA: Buka wa.me/reply_to_phone?text=whatsapp_content
+        U->>WA: Kirim pesan (berisi kode unik)
+        WA->>S: Pesan diterima dari nomor user
+        S->>S: Verifikasi & buat/aktifkan akun
+        U->>W: Klik Refresh
+        W->>S: Cek status / masuk Home
+        S-->>W: Sesi valid (token)
+        W-->>U: Masuk ke Home
+    end
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h2><span class="num">3</span> Endpoint &amp; Body</h2>
+      <p class="lead">Fungsi API yang terlibat beserta struktur body-nya.</p>
+      <div class="card" style="padding:0">
+        <table>
+          <thead>
+            <tr><th>Langkah</th><th>Fungsi</th><th>Endpoint</th><th>Body</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Mulai OTP (login/register)</td>
+              <td><code>whatsapp_reply_otp</code></td>
+              <td><code>POST /web_order/api/satu_kenangan/whatsapp_reply_otp</code></td>
+              <td><code>{ device_id, device_type, otp_type: 1004 }</code></td>
+            </tr>
+            <tr>
+              <td>Cek status OTP (opsional)</td>
+              <td><code>whatsapp_otp_status</code></td>
+              <td><code>POST /web_order/api/satu_kenangan/query_whatsapp_reply_otp_status</code></td>
+              <td><code>{ serial_num }</code></td>
+            </tr>
+            <tr>
+              <td>Alternatif berbasis nomor*</td>
+              <td><code>get_access_token</code></td>
+              <td><code>POST /web_order/api/satu_kenangan/get_access_token</code></td>
+              <td><code>{ phone }</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="lead" style="margin-top:14px; font-size:14px">* <code>get_access_token</code> <strong>tidak dipakai</strong> pada alur Landing utama; alur utamanya murni reverse-OTP lewat <code>whatsapp_reply_otp</code>.</p>
+
+      <p style="margin-top:24px; margin-bottom:8px; font-weight:600">Respons <code>whatsapp_reply_otp</code> saat sukses:</p>
+      <pre><code>{
+  "error_code": 0,
+  "data": {
+    "serial_num": "...",
+    "reply_to_phone": "62xxxxxxxxxx",
+    "whatsapp_content": "teks berisi kode unik yang harus dikirim",
+    "account_error": null
+  }
+}</code></pre>
+    </section>
+
+    <section>
+      <h2><span class="num">4</span> Header Standar</h2>
+      <p class="lead">Fungsi <code>post()</code> menambahkan header ini ke setiap request.</p>
+      <pre><code>Accept: application/json
+language: id            (dari localStorage, default "id")
+time_zone: &lt;offset jam&gt; (mis. 7 untuk WIB)
+authorization: &lt;token&gt;  (jika sudah login)</code></pre>
+    </section>
+
+    <section>
+      <h2><span class="num">5</span> Cara Pakai (Nomor Sendiri)</h2>
+      <ol class="steps">
+        <li>Buka <code>https://order.kopikenangan.com/sk/</code> di HP yang ada WhatsApp-nya.</li>
+        <li>Klik tombol <strong>"Login via WhatsApp"</strong>.</li>
+        <li>WhatsApp terbuka dengan pesan sudah terisi — <strong>kirim apa adanya</strong> ke nomor resmi.</li>
+        <li>Kembali ke browser, klik <strong>"Refresh"</strong>.</li>
+        <li>Masuk ke Home. Jika nomor belum terdaftar, akun dibuat otomatis di langkah ini.</li>
+      </ol>
+      <div class="callout" style="border-left-color: var(--accent-2)">
+        <p style="margin:0">Karena verifikasi memakai <strong>nomor pengirim WhatsApp</strong>, gunakan HP &amp; nomor Anda sendiri.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2><span class="num">6</span> Catatan Teknis</h2>
+      <ul>
+        <li><strong>Reverse OTP:</strong> Anda <em>mengirim</em> pesan berisi kode (bukan menerima lalu mengetik). Server verifikasi dari nomor pengirim.</li>
+        <li><strong><code>otp_type: 1004</code></strong> = kode jenis OTP untuk alur login WhatsApp ini.</li>
+        <li><strong><code>device_id</code></strong> dibuat sekali lalu disimpan di <code>localStorage["sk:deviceId"]</code>, digunakan ulang berikutnya.</li>
+        <li><strong><code>share</code></strong> = objek berisi nama key localStorage (<code>share.token</code>, <code>share.language</code>, <code>share.serial_num</code>), didefinisikan di bundle inti Vue.</li>
+      </ul>
+    </section>
+
+    <footer>
+      <p>Dibuat berdasarkan analisis statis file front-end publik Satu Kenangan / Kopi Kenangan.<br/>Untuk keperluan edukasi &amp; penggunaan dengan akun sendiri.</p>
+    </footer>
+  </div>
+
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: "dark",
+      themeVariables: {
+        primaryColor: "#221c17",
+        primaryTextColor: "#f5ede2",
+        primaryBorderColor: "#d9a441",
+        lineColor: "#b8a894",
+        secondaryColor: "#14100d",
+        tertiaryColor: "#1a1613",
+        fontFamily: "-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif"
+      },
+      flowchart: { curve: "basis", useMaxWidth: true },
+      sequence: { useMaxWidth: true }
+    });
+  </script>
+</body>
+</html>
