@@ -1,865 +1,220 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="theme-color" content="#0D0A07">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Jasdor Kopi">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="description" content="Jasa Order Kopi Kenangan, Tomoro & Fore - Harga Spesial by @faqih0354">
-<link rel="manifest" href="manifest.json">
-<link rel="apple-touch-icon" href="menu_items/icon-192.png">
-<link rel="icon" type="image/png" sizes="192x192" href="menu_items/icon-192.png">
-<title>Jasdor Kopi Harga Spesial</title>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,900&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="NgopsKuy - katalog menu kopi, non-coffee, seliter, roti, dan snack yang siap di-hosting." />
+  <meta name="theme-color" content="#4b2e1f" />
+  <title>NgopsKuy - Kopi Kenangan Style Menu</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <div class="page-decor decor-one" aria-hidden="true"></div>
+  <div class="page-decor decor-two" aria-hidden="true"></div>
 
-<!-- WELCOME MODAL -->
-<div class="welcome-overlay" id="welcomeOverlay">
-  <div class="welcome-modal">
-    <div class="coffee-ring"></div>
-    <div class="coffee-ring-2"></div>
-    <div class="welcome-emoji">
-      <div class="steam-wrap">
-        <div class="steam"></div>
-        <div class="steam"></div>
-        <div class="steam"></div>
-      </div>
-      ☕
-    </div>
-    <div class="welcome-badge">👑 Halo, Sultan & Sultana!</div>
-    <h2 class="welcome-title">Jasa Order Kopi<br><span>Harga Spesial</span></h2>
-    <p class="welcome-sub">by @faqih0354 · 3 brand favorit dalam 1 tempat</p>
+  <header class="site-header" id="top">
+    <nav class="navbar" aria-label="Navigasi utama">
+      <a class="brand" href="#top" aria-label="NgopsKuy Home">
+        <img src="assets/logo.svg" alt="Logo NgopsKuy" class="brand-logo" />
+        <span>
+          <strong>NgopsKuy</strong>
+          <small>kopi favorit siap order</small>
+        </span>
+      </a>
 
-    <p class="brand-intro-hint">👇 Tap brand untuk langsung mulai order!</p>
-    <div class="brand-intro-grid">
-      <div class="brand-intro-item brand-intro-clickable" onclick="closeWelcomeAndSwitch('kopken')" role="button" tabindex="0">
-        <img src="menu_items/logo_kopken.png" alt="Kopi Kenangan">
-        <span>Kopi Kenangan</span>
-        <small>Self-order penuh</small>
-        <div class="brand-intro-tap">Mulai order →</div>
-      </div>
-      <div class="brand-intro-item brand-intro-clickable" onclick="closeWelcomeAndSwitch('tomoro')" role="button" tabindex="0">
-        <img src="menu_items/logo_tomoro.png" alt="Tomoro">
-        <span>Tomoro</span>
-        <small>Promo + WA admin</small>
-        <div class="brand-intro-tap">Mulai order →</div>
-      </div>
-      <div class="brand-intro-item brand-intro-clickable" onclick="closeWelcomeAndSwitch('fore')" role="button" tabindex="0">
-        <img src="menu_items/logo_fore.png" alt="Fore">
-        <span>Fore</span>
-        <small>Promo + WA admin</small>
-        <div class="brand-intro-tap">Mulai order →</div>
-      </div>
-    </div>
-
-    <div class="how-to-label">☕ Cara Order</div>
-    <div class="how-to-list">
-      <div class="how-step">
-        <div class="how-num">1</div>
-        <div class="how-text"><b>Pilih brand favoritmu</b><br><small>Bisa ganti brand kapanpun di tombol switcher</small></div>
-      </div>
-      <div class="how-step">
-        <div class="how-num">2</div>
-        <div class="how-text"><b>Pilih menu / promo yang kamu mau</b><br><small>Kopken: tap menu untuk atur size & sugar · Tomoro/Fore: pilih promo</small></div>
-      </div>
-      <div class="how-step">
-        <div class="how-num">3</div>
-        <div class="how-text"><b>Kirim order via WhatsApp</b><br><small>Auto generate pesan rapi, tinggal kirim</small></div>
-      </div>
-      <div class="how-step">
-        <div class="how-num">4</div>
-        <div class="how-text"><b>Tinggal pickup di store</b><br><small>Harga sudah all-in, no fee tambahan!</small></div>
-      </div>
-    </div>
-
-    <div class="outlet-notice">
-      ⚠️ Harga, menu & stok tiap outlet bisa berbeda. Jika ada perbedaan, penjual akan menginformasikan terlebih dahulu.
-    </div>
-
-    <button class="welcome-cta" onclick="closeWelcomeAndSwitch('kopken')">Yuk, Pesan Sekarang! ☕</button>
-    <p class="welcome-foot">Bisa tap <span class="help-inline">"Cara Order"</span> di atas kapanpun untuk buka panduan ini lagi</p>
-    <div class="welcome-progress">
-      <div class="wp-dot active"></div>
-      <div class="wp-dot"></div>
-      <div class="wp-dot"></div>
-    </div>
-  </div>
-</div>
-
-<!-- HEADER -->
-<header>
-  <div class="logo">
-    ☕ FaqihMedia Store
-    <small>Kopi Kenangan · Tomoro · Fore</small>
-  </div>
-  <div class="header-actions">
-    <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" title="Ganti tema">🌙</button>
-    <button class="help-btn" onclick="openWelcome()">Cara Order</button>
-    <button class="cart-btn" onclick="openCart()">
-      🛒
-      <span class="cart-count" id="cartCount">0</span>
-    </button>
-  </div>
-</header>
-
-<div class="hero">
-  <div class="hero-floaters">
-    <div class="hero-floater">☕</div>
-    <div class="hero-floater">✨</div>
-    <div class="hero-floater">🫧</div>
-    <div class="hero-floater">☕</div>
-    <div class="hero-floater">✦</div>
-  </div>
-  <div class="hero-badge">✦ JASDOR · 3 BRAND FAVORIT ✦</div>
-  <h1>Jasa Order Kopi<br><span>Harga Spesial</span></h1>
-  <p>Kopi Kenangan · Tomoro · Fore — Pilih sesuai mood kamu!</p>
-  <div class="hero-pills">
-    <div class="pill"><span>📍</span>Semua outlet di Indonesia</div>
-    <div class="pill"><span>🚫</span>No min order</div>
-    <div class="pill"><span>⚡</span>Fast Response</div>
-  </div>
-</div>
-
-<!-- BRAND SWITCHER -->
-<div class="brand-switcher-wrap">
-  <div class="brand-switcher-label">
-    <span class="brand-switcher-label-text">Pilih Brand Favorit</span>
-    <span class="brand-switcher-hint">3 brand tersedia</span>
-  </div>
-  <div class="brand-switcher">
-    <button class="brand-btn active" data-brand="kopken" onclick="switchBrand('kopken',this)">
-      <img class="brand-btn-logo" src="menu_items/logo_kopken.png" alt="Kopi Kenangan">
-      <span class="brand-btn-name">Kopi Kenangan</span>
-      <span class="brand-btn-tag brand-tag-full">Self Order</span>
-    </button>
-    <button class="brand-btn" data-brand="tomoro" onclick="switchBrand('tomoro',this)">
-      <img class="brand-btn-logo" src="menu_items/logo_tomoro.png" alt="Tomoro Coffee">
-      <span class="brand-btn-name">Tomoro Coffee</span>
-      <span class="brand-btn-tag brand-tag-promo">Promo + WA</span>
-    </button>
-    <button class="brand-btn" data-brand="fore" onclick="switchBrand('fore',this)">
-      <img class="brand-btn-logo" src="menu_items/logo_fore.png" alt="Fore Coffee">
-      <span class="brand-btn-name">Fore Coffee</span>
-      <span class="brand-btn-tag brand-tag-promo">Promo + WA</span>
-    </button>
-  </div>
-</div>
-
-<!-- TOMORO PROMO PAGE -->
-<div class="brand-page tomoro-theme" id="page-tomoro" style="display:none">
-
-  <!-- hero -->
-  <div class="promo-page-hero tomoro-hero">
-    <div class="brand-logo-wrap tomoro-logo-wrap">
-      <img class="brand-hero-logo tomoro-hero-logo" src="menu_items/logo_tomoro.png" alt="Tomoro Coffee">
-      <span class="brand-hero-name tomoro-hero-name">Tomoro Coffee</span>
-    </div>
-    <p class="promo-page-sub" style="color:rgba(255,204,0,0.6)">2 promo terbaik untukmu · Fee jasdor murah, hemat banyak!</p>
-  </div>
-
-  <!-- contact banner -->
-  <div class="contact-banner tomoro-banner">
-    <div class="contact-banner-text">
-      <span class="contact-banner-icon">💬</span>
-      <div>
-        <div class="contact-banner-title">Mau order Tomoro Coffee?</div>
-        <div class="contact-banner-sub">Chat aku via WA — fast respon, ramah!</div>
-      </div>
-    </div>
-    <button type="button" class="contact-banner-btn tomoro-banner-btn" onclick="openBrandOrder('tomoro')">Chat WA</button>
-  </div>
-
-  <div class="promo-cards">
-
-    <!-- Promo 1: B1G1 -->
-    <div class="promo-card tomoro-card">
-      <div class="promo-card-header tomoro-b1g1">
-        <div class="promo-tag tomoro-tag">🔥 PALING HEMAT</div>
-        <div class="promo-card-title tomoro-title">Buy 1 Get 1</div>
-        <div class="promo-card-sub">Bayar 1 dapat 2 — share-able banget!</div>
-      </div>
-      <div class="promo-card-body">
-        <div class="promo-fee-row tomoro-fee-row">
-          <span class="promo-fee-label">Fee Jasdor</span>
-          <span class="promo-fee-val tomoro-fee-val">Rp5.000</span>
-        </div>
-        <div class="promo-scope">
-          <div class="promo-scope-title">✅ Berlaku untuk</div>
-          <div class="promo-scope-val">All Menu Tomoro Coffee</div>
-        </div>
-        <div class="promo-exclude">
-          <div class="promo-exclude-title">🚫 Kecuali</div>
-          <ul class="promo-exclude-list">
-            <li>Ice Cream Series</li>
-            <li>Master of S.O.E</li>
-            <li>Frappe</li>
-            <li>Limited Time Offers (LTO)</li>
-          </ul>
-        </div>
-</div>
-    </div>
-
-    <!-- Promo 2: 50% off -->
-    <div class="promo-card tomoro-card">
-      <div class="promo-card-header tomoro-50">
-        <div class="promo-tag tomoro-tag">💸 FEE LEBIH MURAH</div>
-        <div class="promo-card-title tomoro-title">Diskon 50%</div>
-        <div class="promo-card-sub">Setengah harga, hemat langsung di kasir</div>
-      </div>
-      <div class="promo-card-body">
-        <div class="promo-fee-row tomoro-fee-row">
-          <span class="promo-fee-label">Fee Jasdor</span>
-          <span class="promo-fee-val tomoro-fee-val">Rp4.000</span>
-        </div>
-        <div class="promo-scope">
-          <div class="promo-scope-title">✅ Berlaku untuk</div>
-          <div class="promo-scope-val">All Menu Tomoro Coffee</div>
-        </div>
-        <div class="promo-exclude">
-          <div class="promo-exclude-title">🚫 Kecuali</div>
-          <ul class="promo-exclude-list">
-            <li>Ice Cream Series</li>
-            <li>Master of S.O.E</li>
-            <li>Frappe</li>
-            <li>Limited Time Offers (LTO)</li>
-          </ul>
-        </div>
-</div>
-    </div>
-
-  </div>
-
-  <!-- bottom WA CTA -->
-  <div class="promo-order-cta">
-    <p class="promo-order-text" style="color:rgba(255,204,0,0.5)">Udah pilih promo? Yuk langsung chat aku!</p>
-    <button type="button" class="promo-wa-btn tomoro-wa-btn" onclick="openBrandOrder('tomoro')">
-      <svg viewBox="0 0 24 24" fill="currentColor" style="width:18px;height:18px;flex-shrink:0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-      Chat @faqih0354
-    </button>
-  </div>
-</div>
-
-<!-- FORE PROMO PAGE -->
-<div class="brand-page fore-theme" id="page-fore" style="display:none">
-
-  <!-- hero -->
-  <div class="promo-page-hero fore-hero">
-    <div class="brand-logo-wrap fore-logo-wrap">
-      <img class="brand-hero-logo fore-hero-logo" src="menu_items/logo_fore.png" alt="Fore Coffee">
-      <span class="brand-hero-name fore-hero-name">Fore Coffee</span>
-    </div>
-    <p class="promo-page-sub" style="color:rgba(0,200,130,0.6)">3 promo siap diorder · Fee jasdor murah, hemat banyak!</p>
-  </div>
-
-  <!-- contact banner -->
-  <div class="contact-banner fore-banner">
-    <div class="contact-banner-text">
-      <span class="contact-banner-icon">💬</span>
-      <div>
-        <div class="contact-banner-title">Mau order Fore Coffee?</div>
-        <div class="contact-banner-sub">Chat aku via WA — fast respon, ramah!</div>
-      </div>
-    </div>
-    <button type="button" class="contact-banner-btn fore-banner-btn" onclick="openBrandOrder('fore')">Chat WA</button>
-  </div>
-
-  <div class="promo-cards">
-
-    <!-- Fore Promo 1: B1G1 -->
-    <div class="promo-card fore-card">
-      <div class="promo-card-header fore-b1g1">
-        <div class="promo-tag fore-tag">🔥 PALING HEMAT</div>
-        <div class="promo-card-title fore-title">Buy 1 Get 1</div>
-        <div class="promo-card-sub">Bayar 1 dapat 2 — bareng temenan jadi makin enak!</div>
-      </div>
-      <div class="promo-card-body">
-        <div class="promo-fee-row fore-fee-row">
-          <span class="promo-fee-label">Fee Jasdor</span>
-          <span class="promo-fee-val fore-fee-val">Rp5.000</span>
-        </div>
-        <div class="promo-scope">
-          <div class="promo-scope-title">✅ Berlaku untuk</div>
-          <div class="promo-scope-val">All Menu Fore Coffee</div>
-        </div>
-        <div class="promo-exclude">
-          <div class="promo-exclude-title">🚫 Kecuali</div>
-          <ul class="promo-exclude-list">
-            <li>Menu Promo aktif lainnya</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <!-- Fore Promo 2: Diskon 35% -->
-    <div class="promo-card fore-card">
-      <div class="promo-card-header fore-35">
-        <div class="promo-tag fore-tag">💸 HEMAT S.D. Rp50RB</div>
-        <div class="promo-card-title fore-title">Diskon 35%</div>
-        <div class="promo-card-sub">Bisa hemat sampai Rp50rb sekali order!</div>
-      </div>
-      <div class="promo-card-body">
-        <div class="promo-fee-row fore-fee-row">
-          <span class="promo-fee-label">Fee Jasdor</span>
-          <span class="promo-fee-val fore-fee-val">Rp4.000 – Rp5.000</span>
-        </div>
-        <div class="promo-scope">
-          <div class="promo-scope-title">✅ Ketentuan</div>
-          <div class="promo-scope-val">Diskon 35% · maks. hemat Rp50.000 · All Menu Fore Coffee</div>
-        </div>
-        <div class="promo-exclude">
-          <div class="promo-exclude-title">🚫 Kecuali</div>
-          <ul class="promo-exclude-list">
-            <li>Menu Promo aktif lainnya</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <!-- Fore Promo 3: Diskon 25% -->
-    <div class="promo-card fore-card">
-      <div class="promo-card-header fore-25">
-        <div class="promo-tag fore-tag">🎁 FEE PALING MURAH</div>
-        <div class="promo-card-title fore-title">Diskon 25%</div>
-        <div class="promo-card-sub">Diskon stabil + fee jasdor cuma Rp3rb</div>
-      </div>
-      <div class="promo-card-body">
-        <div class="promo-fee-row fore-fee-row">
-          <span class="promo-fee-label">Fee Jasdor</span>
-          <span class="promo-fee-val fore-fee-val">Rp3.000</span>
-        </div>
-        <div class="promo-scope">
-          <div class="promo-scope-title">✅ Ketentuan</div>
-          <div class="promo-scope-val">Diskon 25% · maks. hemat Rp50.000 · All Menu Fore Coffee</div>
-        </div>
-        <div class="promo-exclude">
-          <div class="promo-exclude-title">🚫 Kecuali</div>
-          <ul class="promo-exclude-list">
-            <li>Menu Promo aktif lainnya</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- bottom WA CTA -->
-  <div class="promo-order-cta">
-    <p class="promo-order-text" style="color:rgba(0,200,130,0.5)">Udah pilih promo? Yuk langsung chat aku!</p>
-    <button type="button" class="promo-wa-btn fore-wa-btn" onclick="openBrandOrder('fore')">
-      <svg viewBox="0 0 24 24" fill="currentColor" style="width:18px;height:18px;flex-shrink:0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-      Chat @faqih0354
-    </button>
-  </div>
-</div>
-
-<!-- KOPKEN CONTENT (search, tabs, menu) -->
-<div id="page-kopken">
-
-<!-- PROMO BANNER -->
-<div class="promo-banner" onclick="openPromoPopup()">
-  <span class="promo-banner-icon">🎉</span>
-  <span class="promo-banner-text">Promo! Potongan Lagi <b>Rp2.000</b> — 2 Large atau min. Rp35.000</span>
-  <span class="promo-banner-arrow">›</span>
-</div>
-
-<div class="search-wrap">
-  <div class="search-box">
-    <span class="search-ico">🔍</span>
-    <input type="text" id="searchInput" placeholder="Cari menu... (cth: aren, kenangan mantan)" oninput="handleSearch(this.value)" autocomplete="off">
-    <button class="search-clear" id="searchClear" onclick="clearSearch()" aria-label="Bersihkan">✕</button>
-  </div>
-</div>
-
-<!-- TABS -->
-<div class="tabs-wrap">
-  <div class="tabs-label">
-    <span class="tabs-label-text">Pilih Kategori Menu</span>
-    <span class="tabs-swipe-hint">← Geser →</span>
-  </div>
-  <div class="tabs" id="tabsBar">
-    <button class="tab active" data-cat="all" onclick="filterCategory('all',this)">✨ Semua</button>
-    <button class="tab" data-cat="new" onclick="filterCategory('new',this)"><svg class="tab-newicon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1l2.4 7.6L22 11l-7.6 2.4L12 21l-2.4-7.6L2 11l7.6-2.4z"/></svg> Menu Baru</button>
-    <button class="tab" data-cat="coffee" onclick="filterCategory('coffee',this)">☕ Coffee</button>
-    <button class="tab" data-cat="noncoffee" onclick="filterCategory('noncoffee',this)">🧋 Non Coffee</button>
-    <button class="tab" data-cat="oatside" onclick="filterCategory('oatside',this)">🥛 Oatside</button>
-    <button class="tab" data-cat="frappe" onclick="filterCategory('frappe',this)">🧊 Frappe</button>
-    <button class="tab" data-cat="bake" onclick="filterCategory('bake',this)">🍞 Signature Bake</button>
-    <button class="tab" data-cat="toast" onclick="filterCategory('toast',this)">🥪 Toast</button>
-    <button class="tab" data-cat="food" onclick="filterCategory('food',this)">🥐 Food</button>
-  </div>
-</div>
-
-<!-- QUICK FILTERS -->
-<div class="qfilter-wrap" id="qfilterWrap">
-  <button class="qfilter active" data-filter="all" onclick="setQuickFilter('all',this)">Semua</button>
-  <button class="qfilter" data-filter="upsize" onclick="setQuickFilter('upsize',this)">⬆️ Bisa Large</button>
-  <button class="qfilter" data-filter="under15" onclick="setQuickFilter('under15',this)">💸 ≤ Rp15K</button>
-  <button class="qfilter" data-filter="signature" onclick="setQuickFilter('signature',this)">⭐ Signature</button>
-</div>
-
-<!-- ═══ V7: SKELETON LOADING (tampil sebelum menu render) ═══ -->
-<div class="skeleton-wrap" id="skeletonWrap">
-  <div class="skeleton-grid">
-    <div class="skeleton-card">
-      <div class="skeleton-img"></div>
-      <div class="skeleton-body">
-        <div class="skeleton-line w-90"></div>
-        <div class="skeleton-line w-40"></div>
-        <div class="skeleton-line w-70"></div>
-        <div class="skeleton-line tall"></div>
-      </div>
-    </div>
-    <div class="skeleton-card">
-      <div class="skeleton-img"></div>
-      <div class="skeleton-body">
-        <div class="skeleton-line w-70"></div>
-        <div class="skeleton-line w-40"></div>
-        <div class="skeleton-line w-90"></div>
-        <div class="skeleton-line tall"></div>
-      </div>
-    </div>
-    <div class="skeleton-card">
-      <div class="skeleton-img"></div>
-      <div class="skeleton-body">
-        <div class="skeleton-line w-90"></div>
-        <div class="skeleton-line w-40"></div>
-        <div class="skeleton-line w-70"></div>
-        <div class="skeleton-line tall"></div>
-      </div>
-    </div>
-    <div class="skeleton-card">
-      <div class="skeleton-img"></div>
-      <div class="skeleton-body">
-        <div class="skeleton-line w-70"></div>
-        <div class="skeleton-line w-40"></div>
-        <div class="skeleton-line w-90"></div>
-        <div class="skeleton-line tall"></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- MENU -->
-<div class="menu-wrap">
-  <div class="cat-section new-section" id="new-menu">
-    <div class="cat-title"><svg class="cat-newicon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1l2.4 7.6L22 11l-7.6 2.4L12 21l-2.4-7.6L2 11l7.6-2.4z"/></svg> Menu Baru</div>
-    <div class="menu-grid" id="grid-new"></div>
-  </div>
-  <div class="cat-section" id="coffee">
-    <div class="cat-title">☕ Coffee</div>
-    <div class="menu-grid" id="grid-coffee"></div>
-  </div>
-  <div class="cat-section" id="noncoffee">
-    <div class="cat-title">🧋 Non Coffee</div>
-    <div class="menu-grid" id="grid-noncoffee"></div>
-  </div>
-  <div class="cat-section" id="oatside">
-    <div class="cat-title">🥛 Oatside Series</div>
-    <div class="menu-grid" id="grid-oatside"></div>
-  </div>
-  <div class="cat-section" id="frappe">
-    <div class="cat-title">🧊 Kenangan Frappe</div>
-    <div class="menu-grid" id="grid-frappe"></div>
-  </div>
-  <div class="cat-section" id="bake">
-    <div class="cat-title">🍞 Chef Martin's Signature Bake</div>
-    <div class="menu-grid" id="grid-bake"></div>
-  </div>
-  <div class="cat-section" id="toast">
-    <div class="cat-title">🥪 Kenangan Toast</div>
-    <div class="menu-grid" id="grid-toast"></div>
-  </div>
-  <div class="cat-section" id="food">
-    <div class="cat-title">🥐 Food</div>
-    <div class="menu-grid" id="grid-food"></div>
-  </div>
-  <div class="no-results" id="noResults" style="display:none">
-    <div class="emo">🔍</div>
-    <p id="noResultsText">Menu gak ketemu nih...<br><small>Coba kata kunci lain ya</small></p>
-    <div class="no-results-suggestions" id="noResultsSuggestions">
-      <small class="no-results-label">Coba ini:</small>
-      <div class="no-results-chips">
-        <button class="no-results-chip" onclick="searchSuggestion('aren')">aren</button>
-        <button class="no-results-chip" onclick="searchSuggestion('matcha')">matcha</button>
-        <button class="no-results-chip" onclick="searchSuggestion('kenangan mantan')">kenangan mantan</button>
-        <button class="no-results-chip" onclick="searchSuggestion('thai tea')">thai tea</button>
-      </div>
-      <button class="no-results-reset" onclick="resetSearchAndFilters()">↺ Reset pencarian</button>
-    </div>
-  </div>
-</div>
-
-</div><!-- /page-kopken -->
-
-<!-- FLY ANIMATION TARGET -->
-<div class="fly-item" id="flyItem"></div>
-
-<!-- PROMO POPUP -->
-<div class="promo-popup-overlay" id="promoPopupOverlay" onclick="closePromoPopup()">
-  <div class="promo-popup" onclick="event.stopPropagation()">
-    <button class="promo-popup-close" onclick="closePromoPopup()">✕</button>
-    <div class="promo-popup-badge">🎉 PROMO SPESIAL</div>
-    <div class="promo-popup-title">Potongan Lagi <span>Rp2.000</span></div>
-    <div class="promo-popup-divider"></div>
-    <div class="promo-popup-syarat">
-      <div class="promo-syarat-item">
-        <span class="promo-syarat-icon">📏</span>
-        <span>Beli <b>2 minuman Large</b></span>
-      </div>
-      <div class="promo-syarat-or">atau</div>
-      <div class="promo-syarat-item">
-        <span class="promo-syarat-icon">🛒</span>
-        <span>Belanja <b>min. Rp35.000</b></span>
-      </div>
-    </div>
-    <div class="promo-popup-note">Diskon otomatis terhitung di keranjang 🛒</div>
-    <button class="promo-popup-cta" onclick="closePromoPopup()">Yuk Order Sekarang!</button>
-  </div>
-</div>
-
-<!-- FLOAT CART -->
-<div class="float-hint" id="floatHint" onclick="openCart()">
-  🛒 <span id="floatText">Lihat Pesanan</span>
-</div>
-
-<!-- OVERLAY -->
-<div class="overlay" id="overlay" onclick="closeCart()"></div>
-
-<!-- CART DRAWER -->
-<div class="cart-drawer" id="cartDrawer">
-  <div class="drawer-head">
-    <div class="drawer-title">🛒 Pesanan Kamu</div>
-    <button class="close-btn" onclick="closeCart()">✕</button>
-  </div>
-  <div class="drawer-body" id="cartBody">
-    <div class="cart-empty" id="cartEmpty">
-      <div class="emo">☕</div>
-      <p>Belum ada menu dipilih.<br>Yuk mulai order!</p>
-      <div class="cart-empty-sugg">
-        <div class="cart-empty-sugg-label">⭐ Yang sering dipesan</div>
-        <div class="cart-empty-sugg-list" id="cartEmptySuggList"></div>
-      </div>
-    </div>
-  </div>
-  <div class="order-form">
-    <div class="form-group">
-      <label class="form-label">Nama Kamu</label>
-      <input class="form-input" id="inputNama" type="text" placeholder="Contoh: Budi Santoso">
-    </div>
-    <div class="form-group">
-      <label class="form-label">Outlet Kopi Kenangan</label>
-      <input class="form-input" id="inputOutlet" type="text" placeholder="Contoh: KK Mall Ambasador Lt.2">
-    </div>
-    <div class="form-group">
-      <label class="form-label">Catatan untuk Penjual</label>
-      <input class="form-input" id="inputNote" type="text" placeholder="Misal: tolong pisahin topping, dll">
-    </div>
-    <div class="total-row">
-      <div class="total-label">Estimasi Total</div>
-      <div class="total-price" id="totalPrice">Rp0</div>
-    </div>
-    <div class="cart-notice">
-      ⚠️ Harga, menu & stok tiap outlet bisa berbeda. Jika ada perbedaan, penjual akan menginformasikan terlebih dahulu.
-    </div>
-
-    <div class="cart-actions">
-      <button class="reset-btn" id="resetBtn" onclick="confirmReset()" disabled>🗑️ Reset</button>
-      <button class="send-btn" id="sendBtn" onclick="sendToWA()" disabled>
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        Kirim Order
+      <button class="nav-toggle" type="button" aria-label="Buka menu" aria-expanded="false">
+        <span></span><span></span><span></span>
       </button>
-    </div>
-  </div>
-</div>
 
-<!-- ITEM MODAL (bottom sheet) -->
-<div class="item-modal-overlay" id="itemModalOverlay" onclick="if(event.target===this)closeItemModal()">
-  <div class="item-modal">
-    <div class="item-modal-close" onclick="closeItemModal()">✕</div>
-    <div id="itemModalContent"></div>
-  </div>
-</div>
-
-<!-- TOAST -->
-<div class="toast" id="toastNotif"></div>
-
-<!-- CONFIRM MODAL -->
-<div class="confirm-overlay" id="confirmOverlay">
-  <div class="confirm-modal">
-    <div class="confirm-emoji">🗑️</div>
-    <h3 class="confirm-title">Hapus semua pesanan?</h3>
-    <p class="confirm-text">Semua menu di keranjang akan dihapus. Lanjutkan?</p>
-    <div class="confirm-actions">
-      <button class="confirm-no" onclick="closeConfirm()">Batal</button>
-      <button class="confirm-yes" onclick="resetCart()">Ya, Hapus</button>
-    </div>
-  </div>
-</div>
-
-<!-- PREVIEW MODAL -->
-<div class="confirm-overlay preview-overlay" id="previewOverlay">
-  <div class="confirm-modal preview-modal">
-    <div class="preview-head">
-      <h3 class="confirm-title">📋 Cek Pesanan Kamu</h3>
-      <p class="preview-sub">Pastikan semua sudah benar sebelum kirim</p>
-    </div>
-    <div class="preview-body" id="previewBody"></div>
-    <div class="preview-actions">
-      <button class="confirm-no" onclick="closePreview()">✏️ Edit Lagi</button>
-      <button class="confirm-yes preview-send-btn" onclick="confirmSendToWA()">
-        <svg viewBox="0 0 24 24" fill="currentColor" style="width:15px;height:15px;flex-shrink:0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        Kirim ke WA
-      </button>
-    </div>
-  </div>
-</div>
-
-<!-- SUCCESS MODAL -->
-<div class="confirm-overlay" id="successOverlay">
-  <div class="confirm-modal success-modal">
-    <div class="success-sparkles" aria-hidden="true">
-      <span></span><span></span><span></span><span></span>
-      <span></span><span></span><span></span><span></span>
-    </div>
-    <div class="confirm-emoji">🎉</div>
-    <h3 class="confirm-title">Pesanan Dikirim!</h3>
-    <p class="confirm-text">WhatsApp seharusnya sudah terbuka otomatis.<br>Tinggal tap <b>Kirim</b> di WA ya!</p>
-    <div class="success-tips">
-      <div class="success-tip">📍 Jangan lupa konfirmasi outlet-nya</div>
-      <div class="success-tip">⚡ Tunggu konfirmasi dari seller</div>
-    </div>
-    <div class="success-fallback">
-      <div class="success-fallback-title">⚠️ WA tidak terbuka otomatis?</div>
-      <p class="success-fallback-text">Tenang, bisa coba salah satu cara ini:</p>
-      <div class="success-fallback-options">
-        <a class="success-fallback-btn" id="successWaBtn" href="#" target="_blank" rel="noopener noreferrer">
-          <svg viewBox="0 0 24 24" fill="currentColor" style="width:14px;height:14px;flex-shrink:0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          Coba Buka WA Lagi
-        </a>
-        <div class="success-fallback-or">atau</div>
-        <p class="success-fallback-manual">Chat manual ke <b>@faqih0354</b> di WA<br>
-        <a class="success-fallback-link" href="https://wa.me/6281287380732" target="_blank" rel="noopener noreferrer">wa.me/6281287380732</a><br>
-        <span style="opacity:.6;font-size:10.5px">Kalau WA tidak terbuka otomatis — coba buka di browser lain atau hubungi admin langsung.</span></p>
+      <div class="nav-links">
+        <a href="#menu">Menu</a>
+        <a href="#promo">Promo</a>
+        <a href="#cara-order">Cara Order</a>
+        <a href="#lokasi">Lokasi</a>
+        <a class="nav-cta" href="#checkout">Checkout</a>
       </div>
-    </div>
-    <button class="confirm-yes" style="width:100%;background:linear-gradient(135deg,#25D366,#128C7E);margin-top:4px" onclick="closeSuccess()">Oke, Siap! 👋</button>
-  </div>
-</div>
+    </nav>
 
-<!-- ─────────── BRAND ORDER MODAL (Tomoro/Fore) ─────────── -->
-<div class="confirm-overlay brand-order-overlay" id="brandOrderOverlay" onclick="if(event.target===this)closeBrandOrder()">
-  <div class="confirm-modal brand-order-modal" id="brandOrderModal">
-
-    <!-- HEADER (logo + judul, warna nyesuain brand) -->
-    <div class="brand-order-head" id="brandOrderHead">
-      <button class="brand-order-close" onclick="closeBrandOrder()" aria-label="Tutup">×</button>
-      <img class="brand-order-logo" id="brandOrderLogo" src="" alt="">
-      <h3 class="brand-order-title" id="brandOrderTitle">Order Coffee</h3>
-      <p class="brand-order-sub">Pilih voucher promo dulu, lalu lengkapi data</p>
-    </div>
-
-    <!-- STEP 1: Pilih Voucher Promo -->
-    <div class="brand-order-step" id="brandStepPromo">
-      <div class="brand-step-label">
-        <span class="brand-step-num">1</span>
-        <span>Pilih Voucher Promo</span>
-      </div>
-      <div class="brand-promo-cards" id="brandPromoCards">
-        <!-- diisi dari JS -->
-      </div>
-    </div>
-
-    <!-- STEP 2: Form Data Customer -->
-    <div class="brand-order-step" id="brandStepForm" style="display:none">
-      <div class="brand-step-label">
-        <span class="brand-step-num">2</span>
-        <span>Lengkapi Data Pesanan</span>
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">NgopsKuy menu • easy order • WhatsApp checkout</p>
+        <h1>Menu kopi favorit, non-coffee, seliter, dan roti dalam satu katalog NgopsKuy.</h1>
+        <p class="hero-desc">
+          Produk dibuat mendekati katalog kopi populer, sementara background, font, warna, dan hiasan dibuat baru untuk brand <strong>NgopsKuy</strong>.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#menu">Lihat Menu</a>
+          <a class="btn btn-ghost" href="#checkout">Cek Keranjang</a>
+        </div>
+        <div class="status-card" id="storeStatus" role="status"></div>
       </div>
 
-      <div class="brand-selected-promo" id="brandSelectedPromo"></div>
-
-      <div class="brand-form">
-        <div class="brand-form-row">
-          <label class="brand-form-label">Nama Kamu <span class="req">*</span></label>
-          <input type="text" class="brand-form-input" id="brandInputNama" placeholder="Contoh: Faqih">
+      <div class="hero-visual" aria-label="Ilustrasi kopi NgopsKuy">
+        <div class="coffee-card main-cup">
+          <span class="steam steam-a"></span>
+          <span class="steam steam-b"></span>
+          <img class="hero-product-img" src="assets/products/kopi-kenangan-mantan.svg" alt="Kopi Kenangan Mantan style product">
+          <p>Kopi Kenangan Mantan</p>
+          <strong>Favorite Menu</strong>
         </div>
+        <div class="floating-note note-one">+ creamy</div>
+        <div class="floating-note note-two">+ fresh</div>
+        <div class="floating-note note-three">+ kuy!</div>
+      </div>
+    </section>
+  </header>
 
-        <div class="brand-form-row">
-          <label class="brand-form-label">Outlet (Cabang Tujuan) <span class="req">*</span></label>
-          <input type="text" class="brand-form-input" id="brandInputOutlet" placeholder="Contoh: Tomoro Kudus Plaza">
+  <main>
+    <section class="info-strip" aria-label="Benefit NgopsKuy">
+      <article>
+        <strong>Order cepat</strong>
+        <span>Checkout langsung ke WhatsApp.</span>
+      </article>
+      <article>
+        <strong>Menu lengkap</strong>
+        <span>Kopi, non-kopi, snack, dan paket.</span>
+      </article>
+      <article>
+        <strong>Siap hosting</strong>
+        <span>Bisa upload ke Vercel, Netlify, atau hosting biasa.</span>
+      </article>
+    </section>
+
+    <section class="section promo-section" id="promo">
+      <div class="section-heading">
+        <p class="eyebrow">Promo hari ini</p>
+        <h2>Menu favorit buat teman ngantor.</h2>
+      </div>
+      <div class="promo-grid">
+        <article class="promo-card promo-big">
+          <span class="promo-badge">Rekomendasi</span>
+          <h3>Kopi + Roti Favorit</h3>
+          <p>Pilih minuman favorit dan pasangkan dengan roti untuk nemenin kerja atau meeting.</p>
+          <a href="#menu">Pilih menu →</a>
+        </article>
+        <article class="promo-card">
+          <h3>Seliter untuk Sharing</h3>
+          <p>Cocok untuk order tim kecil di kantor atau acara santai.</p>
+        </article>
+        <article class="promo-card">
+          <h3>Fresh Daily</h3>
+          <p>Katalog produk rapi dan mudah diupdate lewat file script.js.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section menu-section" id="menu">
+      <div class="section-heading menu-heading">
+        <div>
+          <p class="eyebrow">Katalog menu</p>
+          <h2>Pilih produk favorit kamu.</h2>
         </div>
-
-        <div class="brand-form-row" id="brandMenuRow">
-          <label class="brand-form-label">Menu yang Mau Dipesan <span class="req">*</span></label>
-          <textarea class="brand-form-input brand-form-textarea" id="brandInputMenu" rows="4" placeholder="Contoh:&#10;1. Aren Latte (Large) - Less Sugar&#10;2. Pandan Latte (Regular)"></textarea>
-          <small class="brand-form-hint">Tulis nama menu, size, dan request kalau ada (sugar/ice)</small>
-        </div>
-
-        <div class="brand-form-row" id="brandQuestionRow" style="display:none">
-          <label class="brand-form-label">Pertanyaan / Yang Mau Ditanyakan <span class="req">*</span></label>
-          <textarea class="brand-form-input brand-form-textarea" id="brandInputQuestion" rows="4" placeholder="Tulis pertanyaan atau hal yang mau ditanyakan ke seller..."></textarea>
-        </div>
-
-        <div class="brand-form-row">
-          <label class="brand-form-label">Catatan (Opsional)</label>
-          <input type="text" class="brand-form-input" id="brandInputNote" placeholder="Misal: tolong dianter pas jam 3">
+        <div class="search-wrap">
+          <label for="searchInput" class="sr-only">Cari menu</label>
+          <input id="searchInput" type="search" placeholder="Cari mantan, latte, seliter, roti..." autocomplete="off" />
         </div>
       </div>
 
-      <div class="brand-form-actions">
-        <button class="brand-btn-back" onclick="brandBackToPromo()">← Pilih Promo Lain</button>
-        <button class="brand-btn-send" id="brandBtnSend" onclick="brandPreview()">Lanjut →</button>
+      <div class="category-tabs" id="categoryTabs" aria-label="Filter kategori menu"></div>
+      <div class="product-grid" id="productGrid"></div>
+      <p class="empty-state" id="emptyState" hidden>Menu tidak ditemukan. Coba kata kunci lain ya.</p>
+    </section>
+
+    <section class="section order-guide" id="cara-order">
+      <div class="section-heading">
+        <p class="eyebrow">Cara order</p>
+        <h2>Simple, tinggal 3 langkah.</h2>
       </div>
-    </div>
+      <div class="steps">
+        <article>
+          <span>01</span>
+          <h3>Pilih menu</h3>
+          <p>Klik tombol tambah pada produk yang kamu inginkan.</p>
+        </article>
+        <article>
+          <span>02</span>
+          <h3>Isi data</h3>
+          <p>Lengkapi nama, metode order, alamat atau catatan.</p>
+        </article>
+        <article>
+          <span>03</span>
+          <h3>Kirim WhatsApp</h3>
+          <p>Pesanan otomatis tersusun dan siap dikirim ke admin.</p>
+        </article>
+      </div>
+    </section>
 
-  </div>
-</div>
+    <section class="section checkout-section" id="checkout">
+      <div class="checkout-card">
+        <div class="checkout-left">
+          <p class="eyebrow">Keranjang</p>
+          <h2>Review pesanan kamu.</h2>
+          <div class="cart-list" id="cartList"></div>
+          <div class="cart-summary">
+            <span>Total</span>
+            <strong id="cartTotal">Rp0</strong>
+          </div>
+        </div>
 
-<!-- ─────────── BRAND PREVIEW MODAL ─────────── -->
-<div class="confirm-overlay preview-overlay" id="brandPreviewOverlay" onclick="if(event.target===this)closeBrandPreview()">
-  <div class="confirm-modal preview-modal">
-    <div class="preview-head">
-      <h3 class="confirm-title">📋 Cek Pesanan Kamu</h3>
-      <p class="preview-sub">Pastikan semua sudah benar sebelum kirim</p>
-    </div>
-    <div class="preview-body" id="brandPreviewBody"></div>
-    <div class="preview-actions">
-      <button class="confirm-no" onclick="closeBrandPreview()">✏️ Edit Lagi</button>
-      <button class="confirm-yes preview-send-btn" onclick="brandSendToWA()">
-        <svg viewBox="0 0 24 24" fill="currentColor" style="width:15px;height:15px;flex-shrink:0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        Kirim ke WA
-      </button>
-    </div>
-  </div>
-</div>
+        <form class="checkout-form" id="checkoutForm">
+          <div class="form-row">
+            <label for="customerName">Nama</label>
+            <input id="customerName" name="customerName" type="text" placeholder="Nama kamu" required />
+          </div>
+          <div class="form-row">
+            <label for="orderMethod">Metode order</label>
+            <select id="orderMethod" name="orderMethod" required>
+              <option value="Pick up">Pick up</option>
+              <option value="Delivery">Delivery</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label for="customerAddress">Alamat / lokasi</label>
+            <textarea id="customerAddress" name="customerAddress" rows="3" placeholder="Tulis alamat, lantai, atau titik pickup"></textarea>
+          </div>
+          <div class="form-row">
+            <label for="customerNote">Catatan</label>
+            <textarea id="customerNote" name="customerNote" rows="3" placeholder="Contoh: less sugar, no ice, jam pickup, dll"></textarea>
+          </div>
+          <button class="btn btn-primary checkout-btn" type="submit">Kirim Order ke WhatsApp</button>
+          <button class="btn btn-light" id="clearCartBtn" type="button">Kosongkan Keranjang</button>
+          <p class="form-note">Nomor WhatsApp admin bisa diganti di file <code>script.js</code>.</p>
+        </form>
+      </div>
+    </section>
 
-<!-- BUKTI ORDER SECTION -->
-<div class="testi-section">
-  <div class="testi-head">
-    <span class="testi-badge">📊 BUKTI ORDER</span>
-    <h2 class="testi-title">Sudah Banyak yang Order</h2>
-    <p class="testi-sub">Lihat bukti pesanan lengkap di <a href="https://x.com/faqih0354" target="_blank">@faqih0354</a></p>
-  </div>
+    <section class="section location-section" id="lokasi">
+      <div class="location-card">
+        <div>
+          <p class="eyebrow">Lokasi & jam</p>
+          <h2>NgopsKuy Corner</h2>
+          <p>Alamat dan jam operasional bisa kamu ganti sesuai kebutuhan. Buka Senin–Sabtu pukul 09.00–20.00.</p>
+        </div>
+        <a class="btn btn-ghost" href="https://maps.google.com" target="_blank" rel="noreferrer">Buka Maps</a>
+      </div>
+    </section>
+  </main>
 
-  <div class="proof-stats">
-    <div class="proof-stat">
-      <div class="proof-num">60<span>+</span></div>
-      <div class="proof-lbl">Pesanan Berhasil</div>
-    </div>
-    <div class="proof-stat">
-      <div class="proof-num">20<span>+</span></div>
-      <div class="proof-lbl">Customer Puas</div>
-    </div>
-    <div class="proof-stat">
-      <div class="proof-num">100<span>%</span></div>
-      <div class="proof-lbl">No Scam</div>
-    </div>
-  </div>
-
-  <div class="testi-track" id="testiTrack"></div>
-
-  <div class="proof-cta-wrap">
-    <a class="proof-cta" href="https://x.com/faqih0354" target="_blank">
-      Lihat Semua Bukti →
+  <aside class="cart-dock" aria-live="polite">
+    <a href="#checkout" class="cart-dock-btn">
+      <span>🛒</span>
+      <strong id="dockQty">0 item</strong>
+      <small id="dockTotal">Rp0</small>
     </a>
-  </div>
-</div>
+  </aside>
 
-<!-- SOCIAL MEDIA FOOTER -->
-<div class="socmed-footer">
-  <div class="socmed-title">📲 Follow & Cek Testi</div>
-  <div class="socmed-links">
-    <a class="socmed-btn" href="https://instagram.com/faqih0354" target="_blank">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.26 5.632 5.905-5.632zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-      @faqih0354
-      <span class="socmed-tag">Instagram</span>
+  <footer class="site-footer">
+    <a class="brand footer-brand" href="#top">
+      <img src="assets/logo.svg" alt="Logo NgopsKuy" class="brand-logo" />
+      <span>
+        <strong>NgopsKuy</strong>
+        <small>kopi favorit siap order</small>
+      </span>
     </a>
-    <a class="socmed-btn" href="https://x.com/faqih0354" target="_blank">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.26 5.632 5.905-5.632zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-      @faqih0354
-      <span class="socmed-tag">Twitter</span>
-    </a>
-    <a class="socmed-btn socmed-wa" href="https://wa.me/6281287380732" target="_blank">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-      @faqih0354
-      <span class="socmed-tag">WhatsApp</span>
-    </a>
-  </div>
-</div>
+    <p>© <span id="year"></span> NgopsKuy. All rights reserved.</p>
+  </footer>
 
-<!-- COPYRIGHT -->
-<div class="copyright">
-  <div class="copyright-inner">
-    <span class="copyright-logo">☕ FaqihMedia Store</span>
-    <span class="copyright-divider">·</span>
-    <span>© 2026 All rights reserved</span>
-    <span class="copyright-divider">·</span>
-    <span>Jasdor Kopi Kenangan · Tomoro · Fore</span>
-  </div>
-  <p class="copyright-note">Harga dapat berubah sewaktu-waktu.</p>
-</div>
-
-<!-- SWIPE INDICATOR -->
-<div class="brand-swipe-overlay" id="swipeOverlay">
-  <div class="brand-swipe-label" id="swipeLabel"></div>
-</div>
-
-<!-- ═══ V7: SPLASH SCREEN (initial loading) ═══ -->
-<div class="splash-overlay" id="splashOverlay">
-  <div class="splash-steam">
-    <span></span><span></span><span></span>
-  </div>
-  <div class="splash-cup">☕</div>
-  <div class="splash-text">FaqihMedia Store</div>
-  <div class="splash-sub">Menyiapkan menu favoritmu...</div>
-  <div class="splash-dots">
-    <span></span><span></span><span></span>
-  </div>
-</div>
-
-<!-- ═══ V7: PULL-TO-REFRESH INDICATOR ═══ -->
-<div class="ptr-indicator" id="ptrIndicator">
-  <span class="ptr-icon" id="ptrIcon">↓</span>
-  <span id="ptrText">Tarik untuk refresh</span>
-</div>
-
-<!-- ═══ V7: ONBOARDING TOUR ═══ -->
-<div class="tour-overlay" id="tourOverlay">
-  <div class="tour-spotlight" id="tourSpotlight"></div>
-  <div class="tour-tooltip" id="tourTooltip">
-    <div class="tour-tooltip-arrow" id="tourArrow"></div>
-    <div class="tour-progress" id="tourProgress"></div>
-    <div class="tour-tooltip-title" id="tourTitle"></div>
-    <div class="tour-tooltip-text" id="tourText"></div>
-    <div class="tour-actions">
-      <button class="tour-skip" onclick="tourSkip()">Lewati tour</button>
-      <button class="tour-next" id="tourNextBtn" onclick="tourNext()">Lanjut →</button>
-    </div>
-  </div>
-</div>
-
-<!-- ═══ V7: BOTTOM NAV BAR (3 tabs - cart pakai floating hint) ═══ -->
-<nav class="bottom-nav" id="bottomNav">
-  <button class="bottom-nav-item active" data-nav="home" onclick="navTo('home')" aria-label="Home">
-    <span class="bottom-nav-icon">🏠</span>
-    <span>Home</span>
-  </button>
-  <button class="bottom-nav-item" data-nav="search" onclick="navTo('search')" aria-label="Cari">
-    <span class="bottom-nav-icon">🔍</span>
-    <span>Cari</span>
-  </button>
-  <button class="bottom-nav-item" data-nav="fav" onclick="navTo('fav')" aria-label="Favorit">
-    <span class="bottom-nav-icon">❤️</span>
-    <span>Favorit</span>
-    <span class="bottom-nav-badge hidden" id="navFavBadge">0</span>
-  </button>
-</nav>
-
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
