@@ -1,0 +1,25 @@
+{
+  "name": "FaqihMedia Store - Jasdor Kopi",
+  "short_name": "Jasdor Kopi",
+  "description": "Jasa Order Kopi Kenangan, Tomoro & Fore - Harga Spesial!",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0D0A07",
+  "theme_color": "#0D0A07",
+  "icons": [
+    {
+      "src": "menu_items/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "menu_items/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
