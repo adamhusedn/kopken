@@ -1,104 +1,36 @@
-# NgopsKuy Website
+# Alur Register / Login — Satu Kenangan (Kopi Kenangan)
 
-Website katalog dan order WhatsApp untuk **NgopsKuy**. Versi ini dibuat agar produk, kategori, dan katalog lebih mendekati referensi yang kamu berikan, tetapi desain background, font, warna, dan hiasan dibuat berbeda.
+Situs statis yang menampilkan **visualisasi alur autentikasi "Login via WhatsApp" (reverse OTP)**
+aplikasi Satu Kenangan / Kopi Kenangan, hasil analisis file bundle front-end publik.
 
-## Isi project
+Halaman utama (`index.html`) merender **flowchart** dan **sequence diagram** Mermaid secara
+otomatis, dilengkapi tabel endpoint, contoh body/response, dan panduan pakai.
 
-- `index.html` — struktur halaman website
-- `styles.css` — desain, font, background, responsive layout
-- `script.js` — konfigurasi toko, nomor WhatsApp, produk, harga, dan keranjang
-- `assets/logo.svg` — logo NgopsKuy
-- `assets/products/` — gambar produk ilustrasi SVG
-- `vercel.json` — konfigurasi deploy statis ke Vercel
+## File
 
-## Catatan aset gambar
+- **`index.html`** — halaman utama (self-contained: CSS inline, Mermaid dari CDN).
+- **`vercel.json`** — konfigurasi deploy.
+- **`docs/auth-flow/`** — salinan halaman + versi Markdown (`alur-register-login-satu-kenangan.md`).
 
-Gambar produk di folder `assets/products` adalah ilustrasi buatan sendiri agar aman untuk hosting. Jika kamu punya izin menggunakan foto/aset asli dari brand lain, kamu bisa mengganti file SVG tersebut dengan gambar resmi.
+## Kesimpulan
 
-## Cara edit nomor WhatsApp
+Tidak ada endpoint `register` terpisah. Register & login **digabung** dalam alur
+**reverse OTP via WhatsApp**: aplikasi memanggil `whatsapp_reply_otp`, lalu user
+**mengirim** pesan berisi kode unik dari WhatsApp-nya sendiri ke nomor resmi.
+Server memverifikasi berdasarkan **nomor pengirim**. Jika nomor belum terdaftar,
+pesan pertama itu otomatis membuatkan akun.
 
-Buka `script.js`, lalu ubah:
-
-```js
-whatsappNumber: "6281234567890"
-```
-
-Gunakan format Indonesia tanpa tanda `+`, contoh:
-
-```js
-whatsappNumber: "6281234567890"
-```
-
-## Cara edit status buka/tutup
-
-Di `script.js`:
-
-```js
-isOpen: true
-```
-
-Ubah menjadi:
-
-```js
-isOpen: false
-```
-
-Kalau toko sedang tutup.
-
-## Cara edit produk
-
-Buka `script.js`, lalu edit data pada bagian:
-
-```js
-const PRODUCTS = [
-  ...
-]
-```
-
-Contoh format produk:
-
-```js
-{
-  id: "kopi-kenangan-mantan",
-  name: "Kopi Kenangan Mantan",
-  category: "Resto's Picks",
-  price: 22000,
-  desc: "Kopi susu gula aren favorit dengan rasa creamy dan manis yang balance.",
-  tag: "Favorite",
-  image: "assets/products/kopi-kenangan-mantan.svg"
-}
-```
-
-## Cara buka di laptop lokal
-
-Masuk ke folder project, lalu jalankan:
+## Jalankan lokal
 
 ```bash
-python -m http.server 8080
+npx serve .
+# atau
+python3 -m http.server 8080
 ```
 
-Buka browser:
+## Deploy ke Vercel
 
-```text
-http://localhost:8080
-```
+Situs statis, tanpa build step. Vercel otomatis mendeteksi dan men-deploy `index.html`
+di root sebagai halaman utama.
 
-## Cara hosting ke Vercel
-
-1. Upload semua file ke GitHub.
-2. Login ke Vercel.
-3. Klik **Add New Project**.
-4. Pilih repository NgopsKuy.
-5. Framework preset: **Other** atau **Static**.
-6. Deploy.
-7. Untuk domain custom, buka **Settings → Domains** di project Vercel.
-
-## Struktur kategori saat ini
-
-- Resto's Picks
-- Coffee
-- Non Coffee
-- Seliter
-- Roti & Snack
-
-Harga dan menu bisa berbeda tergantung outlet/kota. Silakan sesuaikan lagi dengan data final kamu.
+> Dibuat untuk keperluan edukasi & penggunaan dengan akun sendiri.
